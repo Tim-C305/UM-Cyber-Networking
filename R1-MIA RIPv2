@@ -1,0 +1,64 @@
+R1-MAI>en
+R1-MAI#show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     10.0.0.0/8 is variably subnetted, 10 subnets, 2 masks
+C       10.1.10.0/24 is directly connected, GigabitEthernet0/0/0.10
+L       10.1.10.1/32 is directly connected, GigabitEthernet0/0/0.10
+C       10.1.20.0/24 is directly connected, GigabitEthernet0/0/0.20
+L       10.1.20.1/32 is directly connected, GigabitEthernet0/0/0.20
+S       10.2.10.0/24 [1/0] via 172.16.2.2
+R       10.2.20.0/24 [120/1] via 172.16.2.2, 00:00:04, GigabitEthernet0/2/0
+S       10.3.10.0/24 [1/0] via 172.16.1.2
+R       10.3.20.0/24 [120/1] via 172.16.1.2, 00:00:23, GigabitEthernet0/1/0
+S       10.4.10.0/24 [1/0] via 172.16.1.2
+R       10.4.20.0/24 [120/2] via 172.16.2.2, 00:00:04, GigabitEthernet0/2/0
+                     [120/2] via 172.16.1.2, 00:00:23, GigabitEthernet0/1/0
+     172.16.0.0/16 is variably subnetted, 6 subnets, 2 masks
+C       172.16.1.0/30 is directly connected, GigabitEthernet0/1/0
+L       172.16.1.1/32 is directly connected, GigabitEthernet0/1/0
+C       172.16.2.0/30 is directly connected, GigabitEthernet0/2/0
+L       172.16.2.1/32 is directly connected, GigabitEthernet0/2/0
+S       172.16.3.0/30 [1/0] via 172.16.1.2
+S       172.16.4.0/30 [1/0] via 172.16.2.2
+
+R1-MAI#show ip route rip
+     10.0.0.0/8 is variably subnetted, 10 subnets, 2 masks
+R       10.2.20.0/24 [120/1] via 172.16.2.2, 00:00:16, GigabitEthernet0/2/0
+R       10.3.20.0/24 [120/1] via 172.16.1.2, 00:00:06, GigabitEthernet0/1/0
+R       10.4.20.0/24 [120/2] via 172.16.2.2, 00:00:16, GigabitEthernet0/2/0
+                     [120/2] via 172.16.1.2, 00:00:06, GigabitEthernet0/1/0
+
+R1-MAI#show ip protocols
+Routing Protocol is "rip"
+Sending updates every 30 seconds, next due in 22 seconds
+Invalid after 180 seconds, hold down 180, flushed after 240
+Outgoing update filter list for all interfaces is not set
+Incoming update filter list for all interfaces is not set
+Redistributing: rip
+Default version control: send version 2, receive 2
+  Interface             Send  Recv  Triggered RIP  Key-chain
+  GigabitEthernet0/1/0  2     2     
+  GigabitEthernet0/2/0  2     2     
+Automatic network summarization is not in effect
+Maximum path: 4
+Routing for Networks:
+	10.0.0.0
+	172.16.0.0
+Passive Interface(s):
+	GigabitEthernet0/0/0.10
+	GigabitEthernet0/0/0.20
+Routing Information Sources:
+	Gateway         Distance      Last Update
+	172.16.2.2           120      00:00:27
+	172.16.1.2           120      00:00:17
+Distance: (default is 120)
+R1-MAI#
